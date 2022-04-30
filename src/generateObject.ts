@@ -26,7 +26,7 @@ export function generateFromFormBody(
     return_type,
     parameters,
     description: descr,
-    code_example,
+    code_example: code_example.split("\n"),
   };
 }
 
@@ -113,7 +113,7 @@ export interface FunctionDocument {
   return_type: string;
   parameters: Parameter[];
   description: Line[];
-  code_example: string;
+  code_example: string[];
 }
 
 interface FormValues extends Record<string, string> {
