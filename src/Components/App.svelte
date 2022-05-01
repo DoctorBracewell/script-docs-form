@@ -48,12 +48,12 @@
     {#key reset}
       <TextInput name="name" />
       <TextInput name="shortcut" />
+      <Parameters />
       <TextInput name="return_type" />
       <TextInput name="description" textarea />
       <TextInput name="code_example" textarea />
     {/key}
 
-    <Parameters />
     <div class="w-full flex">
       <button
         type="submit"
