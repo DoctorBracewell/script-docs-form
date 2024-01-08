@@ -1,6 +1,7 @@
 <script lang="ts">
   import { capitaliseFirstCharacters, parameters } from "../utils";
   import TextInput from "./TextInput.svelte";
+  import TypeInput from "./TypeInput.svelte";
 
   let params;
 
@@ -33,7 +34,7 @@
     <fieldset class="border-2 border-neutral-400 px-3 rounded-md mb-5">
       <legend>{capitaliseFirstCharacters(`parameter_${index}`)}</legend>
       <TextInput name={`parameter_${index}_name`} display="name" />
-      <TextInput name={`parameter_${index}_type`} display="type" />
+      <TypeInput name={`parameter_${index}_type`} display="type" />
     </fieldset>
   {/each}
 </div>

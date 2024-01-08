@@ -5,6 +5,7 @@
   import { FunctionDocument, generateFromFormBody } from "../generateObject";
   import Parameters from "./Parameters.svelte";
   import TextInput from "./TextInput.svelte";
+  import TypeInput from "./TypeInput.svelte";
 
   let output: FunctionDocument;
   let prettyOutput = "";
@@ -13,9 +14,9 @@
 
   const handleSubmit = (event) => {
     output = generateFromFormBody(event.target);
-    prettyOutput = JSON.stringify(output, null, "\t");
+    prettyOutput = JSON.stringify(output, null, "\t") + ",\n";
 
-    navigator.clipboard.writeText(prettyOutput + ",");
+    navigator.clipboard.writeText(prettyOutput);
 
     copied = true;
     setTimeout(() => (copied = false), 1500);
@@ -49,7 +50,7 @@
       <TextInput name="name" />
       <TextInput name="shortcut" />
       <Parameters />
-      <TextInput name="return_type" />
+      <TypeInput name="return_type" />
       <TextInput name="description" textarea />
       <TextInput name="code_example" textarea />
     {/key}
