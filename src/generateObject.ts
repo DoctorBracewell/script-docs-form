@@ -46,8 +46,13 @@ function createParameterArray(formValues: FormValues): Parameter[] {
 function parseText(text: string): Line[] {
   const trimmedLines = text.split("\n").map((line) => line.trim());
 
-  const parsedLines = trimmedLines.map((line) => {
-    const nodes = md(line);
+  const listLines = trimmedLines.map((line) => ({
+    list_item: line.startsWith("- "),
+    text: line.startsWith("- ") ? line.slice(2) : line,
+  }));
+
+  const parsedLines = listLines.map((line) => {
+    const nodes = md(line.text);
 
     const filtered: unknown = [...nodes].filter(function f(obj: any) {
       if (!["text", "bold", "codeSpan", "italic", "strike"].includes(obj.type))
@@ -67,7 +72,9 @@ function parseText(text: string): Line[] {
         formatting.length === new Set(formatting).size ? formatting : [],
     }));
 
-    return finalText;
+    return line.list_item
+      ? [{ text: "- ", formatting: [] }, ...finalText]
+      : finalText;
   });
 
   return parsedLines;
